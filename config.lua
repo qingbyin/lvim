@@ -67,7 +67,12 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>" -- save the current file
 lvim.keys.normal_mode["<S-l>"] = "$"
 lvim.keys.normal_mode["<S-h>"] = "0"
-lvim.keys.normal_mode["<leader>q"] = false
+lvim.builtin.which_key.mappings["q"] = {
+  "<cmd>BufferKill<cr>", "Close Buffer"
+}
+lvim.builtin.which_key.mappings["Q"] = {
+  "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit"
+}
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -80,8 +85,12 @@ lvim.keys.normal_mode["gk"] = ":Gitsigns prev_hunk<cr>"
 lvim.lsp.buffer_mappings.normal_mode['gh'] = { vim.lsp.buf.hover, "Show hover" }
 lvim.keys.normal_mode["<C-p>"] = ":Telescope git_files<cr>"
 lvim.keys.normal_mode["<M-p>"] = ":Telescope buffers theme=ivy initial_mode=normal<cr>"
-lvim.keys.normal_mode["<leader>F"] = ":Telescope live_grep<cr>"
-lvim.keys.normal_mode["<leader>f"] = ":Telescope current_buffer_fuzzy_find theme=ivy<cr>"
+lvim.builtin.which_key.mappings["F"] = {
+  "<cmd>Telescope live_grep<cr>", "Grep Globally"
+}
+lvim.builtin.which_key.mappings["f"] = {
+  "<cmd>Telescope current_buffer_fuzzy_find theme=ivy<cr>", "Grep buffer"
+}
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 local _, actions = pcall(require, "telescope.actions")
