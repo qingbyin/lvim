@@ -70,6 +70,8 @@ lvim.keys.normal_mode["<S-h>"] = "0"
 lvim.builtin.which_key.mappings["q"] = {
   "<cmd>BufferKill<cr>", "Close Buffer"
 }
+lvim.keys.normal_mode["<Tab>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-Tab>"] = ":BufferLineCyclePrev<CR>"
 lvim.builtin.which_key.mappings["Q"] = {
   "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit"
 }
@@ -82,6 +84,7 @@ lvim.lsp.buffer_mappings.normal_mode["gs"] = nil
 lvim.keys.normal_mode["gs"] = ":Gitsigns stage_hunk<cr>"
 lvim.keys.normal_mode["gj"] = ":Gitsigns next_hunk<cr>"
 lvim.keys.normal_mode["gk"] = ":Gitsigns prev_hunk<cr>"
+lvim.keys.normal_mode["go"] = ":Telescope lsp_document_symbols theme=ivy<cr>"
 lvim.lsp.buffer_mappings.normal_mode['gh'] = { vim.lsp.buf.hover, "Show hover" }
 lvim.keys.normal_mode["<C-p>"] = ":Telescope git_files<cr>"
 lvim.keys.normal_mode["<M-p>"] = ":Telescope buffers theme=ivy initial_mode=normal<cr>"
@@ -236,11 +239,11 @@ lvim.builtin.treesitter.highlight.enable = true
 -- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = { "*.json", "*.jsonc" },
---   -- enable wrap mode for json files only
---   command = "setlocal wrap",
--- })
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.launch"},
+  -- enable wrap mode for json files only
+  command = "setfiletype xml",
+})
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "zsh",
 --   callback = function()
